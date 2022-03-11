@@ -12,9 +12,12 @@ public class EmpWageBuilder {
 		int empHours = 0;
 		int empWage = 0;
 		int TotalEmpWage = 0;
+		int TotalEmpHour = 0;
+		int TotalWorkingDays = 0;
 		
-		for (int day = 0; day < NO_OF_WORKING_DAYS; day++) {
-			
+		while (TotalEmpHour <= 100 && TotalWorkingDays <= NO_OF_WORKING_DAYS) {	
+		//for (int day = 0; day < NO_OF_WORKING_DAYS; day++) {
+			TotalWorkingDays++;
 			double empCheck = Math.floor(Math.random() * 10) % 3;
 		
 			switch ((int)empCheck) { 
@@ -40,11 +43,12 @@ public class EmpWageBuilder {
 		
 			empWage = empHours * EMP_RATE_PER_HOUR;
 			TotalEmpWage += empWage;
-			System.out.println("Employee Wage: " + empWage);	
+			TotalEmpHour += empHours;
+			//System.out.println("Employee Wage: " + empWage);
+			System.out.println("Total Employee Wage :" + TotalEmpWage);
+
 			
 		}
-		
-		System.out.println("Total Employee Wage :" + TotalEmpWage);
 		
 	}	
 		
