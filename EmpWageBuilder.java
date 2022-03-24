@@ -21,13 +21,13 @@ public class EmpWageBuilder implements ComputeEmpWage {
 	public void empWageCalc() {
 		for(int i = 0; i < companyEmpWageArrayList.size(); i++) {
 			CompanyEmpWage companyEmpWage = companyEmpWageArrayList.get(i);
-			int totalEmpWage = this.empWageCalc(companyEmpWage);
+			int totalEmpWage = this.empTotalWage(companyEmpWage);
 			System.out.println("Total Employee Wage for Company " + companyEmpWage.company + " is: " + totalEmpWage);
 			System.out.println("---------------------------------------------------------");
 		}
 	}
 	
-	public int empWageCalc(CompanyEmpWage companyEmpWage) {
+	public int empTotalWage(CompanyEmpWage companyEmpWage) {
 		int totalEmpHour = 0;
 		int empHour = 0;
 		int totalWorkingDays = 0;
