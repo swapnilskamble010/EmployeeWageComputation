@@ -23,6 +23,7 @@ public class EmpWageBuilder implements ComputeEmpWage {
 			CompanyEmpWage companyEmpWage = companyEmpWageArrayList.get(i);
 			int totalEmpWage = this.empWageCalc(companyEmpWage);
 			System.out.println("Total Employee Wage for Company " + companyEmpWage.company + " is: " + totalEmpWage);
+			System.out.println("---------------------------------------------------------");
 		}
 	}
 	
@@ -47,6 +48,8 @@ public class EmpWageBuilder implements ComputeEmpWage {
 				empHour = 0;		
 			}
 			totalEmpHour += empHour;
+			int dailyWage = empHour * companyEmpWage.empRatePerHr;
+			System.out.println("Daily Employee Wage for Company " + companyEmpWage.company + " is: "+ dailyWage);
 		}
 		return companyEmpWage.totalEmpWage = totalEmpHour * companyEmpWage.empRatePerHr;	
 	}
