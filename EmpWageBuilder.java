@@ -1,56 +1,53 @@
-package empwage;
+package employeewagebuilder;
 
 public class EmpWageBuilder {
-
-	public static void main(String[] args) {
-		
-		System.out.println("Welcome to Employee Wage Computation Program");
-		final int IS_FULL_TIME = 1;
-		final int IS_PART_TIME = 2;
-		final int EMP_RATE_PER_HOUR = 20;
-		final int NO_OF_WORKING_DAYS = 20;
-		int empHours = 0;
-		int empWage = 0;
-		int TotalEmpWage = 0;
-		int TotalEmpHour = 0;
-		int TotalWorkingDays = 0;
-		
-		while (TotalEmpHour <= 100 && TotalWorkingDays <= NO_OF_WORKING_DAYS) {	
-		//for (int day = 0; day < NO_OF_WORKING_DAYS; day++) {
-			TotalWorkingDays++;
-			double empCheck = Math.floor(Math.random() * 10) % 3;
-		
-			switch ((int)empCheck) { 
-		
-			case (IS_FULL_TIME):
-				System.out.println("Employee is Present");
-				empHours = 8;
-				//empWage = empHours * EMP_RATE_PER_HOUR;
-				//System.out.println("Employee Wage: " + empWage);
-				break;
-				
-			case (IS_PART_TIME):
-				System.out.println("Part Time Employee is Present");
-				empHours = 4;
-				//empWage = empHours * EMP_RATE_PER_HOUR;
-				//System.out.println("Employee Wage: " + empWage);
-				break;
+	final byte WAGE_PER_HOUR = 20;
+	byte empHour = 0;
+	byte workingDaysCount = 0;
+	
+	void checkAttendance(double empCheck) {
+		switch((int)empCheck) {
+		case 1:
+			System.out.println("Employee is Present");
+			this.empHour = 8;
+			workingDaysCount++;
+			break;
 			
-			default:
-				System.out.println("Employee is Absent");
-				//System.out.println("Employee Wage: " + empWage);
-			}
-		
-			empWage = empHours * EMP_RATE_PER_HOUR;
-			TotalEmpWage += empWage;
-			TotalEmpHour += empHours;
-			//System.out.println("Employee Wage: " + empWage);
-			System.out.println("Total Employee Wage :" + TotalEmpWage);
-
+		case 2:
+			System.out.println("Part time Employee is Present");
+			this.empHour = 4;
+			workingDaysCount++;
+			break;
 			
+		default:
+			System.out.println("Employee is Absent");
+			this.empHour = 0;		
 		}
-		
-	}	
-		
-
+	}
+	
+	void wageCalculation() {
+		int totalEmpWage = 0;
+		int totalEmpHour = 0;
+		EmpWageBuilder empWage = new EmpWageBuilder();
+		while (empWage.workingDaysCount < 21 || totalEmpHour < 101){
+			if (empWage.workingDaysCount > 20 || totalEmpHour > 100){
+				break;
+			}
+			double empCheck = Math.floor(Math.random() * 10) % 3;
+			empWage.checkAttendance(empCheck);
+			int dailyEmpWage = empWage.WAGE_PER_HOUR * empWage.empHour;
+			//System.out.println("Daily Wage of Employee is : " + dailyEmpWage);
+			totalEmpHour += empWage.empHour;
+			System.out.println("Total Employe Hour is: " + totalEmpHour);
+			System.out.println("Total Working Days of Employee is : " + empWage.workingDaysCount);
+			totalEmpWage += dailyEmpWage;				
+			System.out.println("Monthly Wage of Employee is : " + totalEmpWage);
+		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("Welcome to Employee Wage Computation Program using OOP's concepts");
+		EmpWageBuilder empWage = new EmpWageBuilder();
+		empWage.wageCalculation();
+	}
 }
