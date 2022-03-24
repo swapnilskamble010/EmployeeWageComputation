@@ -1,10 +1,9 @@
 package employeewagebuilder;
 
-public class EmpWageBuilder {
+public class EmpWageBuilder implements ComputeEmpWage {
 	public static final int IS_FULL_TIME = 1; 
 	public static final int IS_PART_TIME = 2; 
 	
-
 	private int numOfCompanies = 0;
 	private CompanyEmpWage[] companyEmpWageArray;
 	
@@ -12,19 +11,19 @@ public class EmpWageBuilder {
 		companyEmpWageArray = new CompanyEmpWage[5];
 	}
 	
-	private void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHrsPerMonth) {
+	public void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHrsPerMonth) {
 		companyEmpWageArray[numOfCompanies] = new CompanyEmpWage(company, empRatePerHr, numOfWorkingDays, maxHrsPerMonth);
 		numOfCompanies++;
 	}
 	
-	private void empWageCalc() {
+	public void empWageCalc() {
 		for(int i = 0; i < numOfCompanies; i++) {
 			int totalEmpWage = this.empWageCalc(companyEmpWageArray[i]);
 			System.out.println("Total Employee Wage for Company " + companyEmpWageArray[i].company + " is: " + totalEmpWage);
 		}
 	}
 	
-	private int empWageCalc(CompanyEmpWage companyEmpWage) {
+	public int empWageCalc(CompanyEmpWage companyEmpWage) {
 		int totalEmpHour = 0;
 		int empHour = 0;
 		int totalWorkingDays = 0;
