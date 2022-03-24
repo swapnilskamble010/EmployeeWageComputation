@@ -1,53 +1,40 @@
 package employeewagebuilder;
 
 public class EmpWageBuilder {
-	final byte WAGE_PER_HOUR = 20;
-	byte empHour = 0;
-	byte workingDaysCount = 0;
+	public static final int IS_FULL_TIME = 1; 
+	public static final int IS_PART_TIME = 2; 
 	
-	void checkAttendance(double empCheck) {
-		switch((int)empCheck) {
-		case 1:
-			System.out.println("Employee is Present");
-			this.empHour = 8;
-			workingDaysCount++;
-			break;
-			
-		case 2:
-			System.out.println("Part time Employee is Present");
-			this.empHour = 4;
-			workingDaysCount++;
-			break;
-			
-		default:
-			System.out.println("Employee is Absent");
-			this.empHour = 0;		
-		}
-	}
-	
-	void wageCalculation() {
+	public EmpWageBuilder(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth) {
 		int totalEmpWage = 0;
 		int totalEmpHour = 0;
-		EmpWageBuilder empWage = new EmpWageBuilder();
-		while (empWage.workingDaysCount < 21 || totalEmpHour < 101){
-			if (empWage.workingDaysCount > 20 || totalEmpHour > 100){
+		int empHour = 0;
+		int totalWorkingDays = 0;
+		
+		while(totalEmpHour <= maxHrsPerMonth && totalWorkingDays <= numOfWorkingDays) {
+			totalWorkingDays++;
+			int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+			switch(empCheck) {
+			case IS_FULL_TIME:
+				empHour = 8;
 				break;
+				
+			case IS_PART_TIME:
+				empHour = 4;
+				break;
+				
+			default:
+				empHour = 0;		
 			}
-			double empCheck = Math.floor(Math.random() * 10) % 3;
-			empWage.checkAttendance(empCheck);
-			int dailyEmpWage = empWage.WAGE_PER_HOUR * empWage.empHour;
-			//System.out.println("Daily Wage of Employee is : " + dailyEmpWage);
-			totalEmpHour += empWage.empHour;
-			System.out.println("Total Employe Hour is: " + totalEmpHour);
-			System.out.println("Total Working Days of Employee is : " + empWage.workingDaysCount);
-			totalEmpWage += dailyEmpWage;				
-			System.out.println("Monthly Wage of Employee is : " + totalEmpWage);
+			totalEmpHour += empHour;
 		}
+		totalEmpWage = totalEmpHour * empRatePerHour;	
+		System.out.println("Total Employee Wage for Company " + company + " is : " + totalEmpWage);
 	}
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome to Employee Wage Computation Program using OOP's concepts");
-		EmpWageBuilder empWage = new EmpWageBuilder();
-		empWage.wageCalculation();
+		EmpWageBuilder dMart = new EmpWageBuilder("DMart", 20, 30, 150);
+		EmpWageBuilder bigBasket = new EmpWageBuilder("Big Basket", 25, 30, 200);
+		EmpWageBuilder relianceMart = new EmpWageBuilder("Reliance Mart", 22, 30, 300);
 	}
 }
